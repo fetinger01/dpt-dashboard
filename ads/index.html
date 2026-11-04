@@ -8,7 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="/assets/dpt.css?v=20261104d">
+<link rel="stylesheet" href="/assets/dpt.css?v=20261104e">
+<script>(function(){try{var t=localStorage.getItem('dpt-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<script src="/assets/theme.js?v=20261104e" defer></script>
 </head>
 <body>
 <table class="pt" role="presentation"><tfoot><tr><td></td></tr></tfoot><tbody><tr><td>
@@ -40,6 +42,11 @@
       </nav>
       <div class="controls">
         <span class="spacer"></span>
+        <button type="button" class="btn btn-quiet" id="theme" aria-label="Switch to dark mode">
+          <svg class="ic-moon" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 9.5A5.5 5.5 0 0 1 6.5 2.5a5.5 5.5 0 1 0 7 7z"/></svg>
+          <svg class="ic-sun" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="8" cy="8" r="3"/><path d="M8 1.5v1.5M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1 1M11.6 11.6l1 1M3.4 12.6l1-1M11.6 4.4l1-1"/></svg>
+          <span class="theme-text">Dark</span>
+        </button>
         <button type="button" class="btn" id="export">
           <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6V2.5h8V6M4 12H2.5V7h11v5H12M4.5 9.5h7v4h-7z"/></svg>
           Export PDF

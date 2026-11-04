@@ -84,6 +84,8 @@ sup.fn a{text-decoration:none;font-weight:700}
 .btn{appearance:none;display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:999px;padding:8px 16px;font-size:13px;font-weight:700;line-height:1.2;cursor:pointer;text-decoration:none}
 .btn:hover{opacity:.9}
 .btn svg{width:14px;height:14px}
+.btn-quiet{background:transparent;color:var(--ink-700);border:1px solid var(--line)}
+.btn-quiet:hover{color:var(--ink);opacity:1}
 .notice{display:none;border-left:3px solid var(--red);padding:4px 0 4px 14px;font-size:14px;color:var(--ink-700)}
 .notice.on{display:block}
 .notice.quiet{border-left-color:var(--line)}
