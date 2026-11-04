@@ -1,0 +1,854 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Diamond ProTech Performance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="/assets/dpt.css">
+</head>
+<body>
+<table class="pt" role="presentation"><tfoot><tr><td></td></tr></tfoot><tbody><tr><td>
+<main class="page">
+
+  <header class="top">
+    <div class="masthead">
+      <div class="brand">
+        <span class="wordmark">Diamond ProTech <span class="dot">·</span></span>
+        <span class="label">Google Ads · Search campaign</span>
+      </div>
+      <h1>Fall 2026 search campaign</h1>
+      <p class="lede">Results of the Fall 2026 search campaign, read from the Diamond ProTech Google Ads account and refreshed hourly.</p>
+      <div class="pills">
+        <span class="pill pill-quiet">Refreshed hourly</span>
+        <span class="pill pill-quiet" id="pill-range">Since launch</span>
+      </div>
+      <p class="meta" id="meta">Last updated · Google Ads account 979-161-2242 · Prepared by Etinger Initiatives</p>
+      <nav class="sitenav" aria-label="Pages">
+        <a href="/" aria-current="page">Dashboard</a>
+        <a href="/aplus/">A+ pilot</a>
+        <a href="/ads/">Ads</a>
+      </nav>
+      <div class="controls">
+        <div role="group" aria-label="Date range" class="pills" id="ranges">
+          <button type="button" class="rangepill" data-range="launch" aria-pressed="true">Since launch</button>
+          <button type="button" class="rangepill" data-range="d7" aria-pressed="false">Last 7 days</button>
+          <button type="button" class="rangepill" data-range="d30" aria-pressed="false">Last 30 days</button>
+          <button type="button" class="rangepill" data-range="custom" aria-pressed="false">Custom</button>
+          <span class="custom" id="custom">
+            <label>From <input type="date" class="datein" id="from"></label>
+            <label>To <input type="date" class="datein" id="to"></label>
+          </span>
+        </div>
+        <span class="spacer"></span>
+        <button type="button" class="btn" id="export">
+          <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6V2.5h8V6M4 12H2.5V7h11v5H12M4.5 9.5h7v4h-7z"/></svg>
+          Export PDF
+        </button>
+      </div>
+      <p class="notice" id="notice" role="status"></p>
+    </div>
+    <div>
+      <div class="kf" role="list" aria-label="Key figures" id="kf">
+        <div role="listitem"><b id="kf-spent">·</b><span class="label">Spent</span></div>
+        <div role="listitem"><b id="kf-clicks">·</b><span class="label">Clicks</span></div>
+        <div role="listitem"><b id="kf-ctr">·</b><span class="label">Click-through</span></div>
+        <div role="listitem"><b id="kf-purchases">·</b><span class="label">Purchases</span></div>
+        <div role="listitem"><b id="kf-value">·</b><span class="label">In orders</span></div>
+        <div role="listitem"><b id="kf-return">·</b><span class="label">Return</span></div>
+      </div>
+      <p class="source" id="kf-source">Google Ads account 979-161-2242, refreshed hourly.<sup class="fn"><a href="#fn1">1</a></sup></p>
+    </div>
+  </header>
+
+  <section class="sec" id="daily">
+    <div class="sec-head">
+      <p class="label">01 · Daily</p>
+      <h2>Spend by day against the budget</h2>
+    </div>
+    <div>
+      <div class="chart" id="chart" aria-describedby="chart-source"></div>
+      <div class="legend" id="legend">
+        <span><i></i>Spend</span>
+        <span><i class="dash"></i>Budget $7.14 a day</span>
+        <span><i class="dot"></i>Purchases</span>
+      </div>
+      <p class="notice quiet" id="chart-note"></p>
+      <p class="no-print" style="margin-top:8px"><button type="button" class="linkbtn" id="table-toggle">Show as table</button></p>
+      <div class="table-wrap hidden" id="daily-table"></div>
+      <p class="source" id="chart-source">Google Ads, campaign report by day, refreshed hourly.<sup class="fn"><a href="#fn1">1</a></sup></p>
+    </div>
+  </section>
+
+  <section class="sec" id="keywords">
+    <div class="sec-head">
+      <p class="label">02 · Keywords</p>
+      <h2>Where the clicks come from</h2>
+    </div>
+    <div>
+      <div class="table-wrap" id="kw-table"></div>
+      <p class="source" id="kw-source">Google Ads, search keywords. Brackets mark exact matches, quotes mark phrase matches.<sup class="fn"><a href="#fn2">2</a></sup></p>
+    </div>
+  </section>
+
+  <section class="sec" id="terms">
+    <div class="sec-head">
+      <p class="label">03 · Search terms</p>
+      <h2>What people typed before clicking</h2>
+    </div>
+    <div>
+      <div class="table-wrap" id="st-table"></div>
+      <p class="source" id="st-source">Google Ads, search terms, top terms by cost. A red chip marks a term that matches one of the recommended negatives.<sup class="fn"><a href="#fn3">3</a></sup></p>
+    </div>
+    <div class="hk">
+      <p class="label">Negatives</p>
+      <div class="hk-row" id="neg-recommended"></div>
+      <div class="hk-row" id="neg-account"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="devices">
+    <div class="sec-head">
+      <p class="label">04 · Devices</p>
+      <h2>Where the ads are seen</h2>
+    </div>
+    <div>
+      <div class="stats" id="dev-stats"></div>
+      <p class="source" id="dev-source">Google Ads, campaign report by device.<sup class="fn"><a href="#fn4">4</a></sup></p>
+    </div>
+  </section>
+
+  <section class="sec" id="housekeeping">
+    <div class="sec-head">
+      <p class="label">05 · Housekeeping</p>
+      <h2>Tracking, budget and bidding</h2>
+    </div>
+    <div>
+      <p class="label table-title">Conversion actions</p>
+      <div class="table-wrap" id="ca-table"></div>
+      <p class="source">Google Ads, conversion actions enabled in the account at the last refresh. Add to cart, Begin checkout and Page view showed as misconfigured on the Goals page on Nov 4, 2026; they are secondary goals, and purchase tracking is correct.<sup class="fn"><a href="#fn5">5</a></sup></p>
+    </div>
+    <dl class="defs" id="campaign-defs"></dl>
+  </section>
+
+  <footer>
+    <p>Prepared by Etinger Initiatives for Diamond ProTech.</p>
+    <p id="foot-line">Figures from Google Ads account 979-161-2242, refreshed hourly by a script in the account.</p>
+    <ol class="footnotes">
+      <li id="fn1">Google Ads account 979-161-2242, campaign report by day, <span class="fn-range">the selected range</span>. Spend, clicks, purchases and order value are summed over the range; click-through is clicks divided by impressions; return is order value divided by spend.</li>
+      <li id="fn2">Google Ads, search keywords report, <span class="fn-window">the selected range</span>.</li>
+      <li id="fn3">Google Ads, search terms report, <span class="fn-window">the selected range</span>. Recommended negatives: fusion, ecp, pinnacle, c6, graphene, plate, shower, seal, proposed Nov 4, 2026 and pending approval.</li>
+      <li id="fn4">Google Ads, campaign report by device, <span class="fn-window">the selected range</span>.</li>
+      <li id="fn5">Google Ads, conversion actions and campaign settings, read at the last refresh. Goals page read Nov 4, 2026.</li>
+    </ol>
+  </footer>
+
+</main>
+</td></tr></tbody></table>
+<div class="print-foot" aria-hidden="true"><span id="pf-left">Diamond ProTech Performance</span><span id="pf-right">Refreshed hourly from Google Ads account 979-161-2242</span></div>
+
+<script>
+(function () {
+  'use strict';
+
+  var CONFIG = {
+    account: '979-161-2242',
+    budgetPerDay: 7.14,
+    recommended: ['fusion', 'ecp', 'pinnacle', 'c6', 'graphene', 'plate', 'shower', 'seal'],
+    fallbackReadLabel: 'Nov 4, 2026'
+  };
+
+  // Built-in figures read in Google Ads on Nov 4, 2026, window Oct 19 to Nov 4. Same shape as /api/data.
+  var FALLBACK = {
+    meta: 'last_updated,2026-11-04 00:15 ET\naccount_id,979-161-2242\naccount_timezone,America/New_York\nstart_date,2026-10-19\nthrough_date,2026-11-04\n',
+    daily: '',
+    keywords: 'campaign.name,ad_group.name,ad_group_criterion.keyword.text,ad_group_criterion.keyword.match_type,ad_group_criterion.status,metrics.impressions,metrics.clicks,metrics.cost_micros,metrics.conversions,metrics.conversions_value\n' +
+      '"DPT | Search | Brand + Products | Fall 2026",Ad group 1,diamond protech,EXACT,ENABLED,18,9,11100000,,\n' +
+      '"DPT | Search | Brand + Products | Fall 2026",Ad group 1,diamond car coating,PHRASE,ENABLED,58,6,7080000,,\n' +
+      '"DPT | Search | Brand + Products | Fall 2026",Ad group 1,diamond protech,PHRASE,ENABLED,15,6,6930000,,\n' +
+      '"DPT | Search | Brand + Products | Fall 2026",Ad group 1,diamond pro tech,EXACT,ENABLED,9,4,4930000,,\n' +
+      '"DPT | Search | Brand + Products | Fall 2026",Ad group 1,diamond body coating,PHRASE,ENABLED,36,2,2500000,,\n',
+    search_terms: '',
+    devices: '',
+    campaigns: 'campaign.id,campaign.name,campaign.status,campaign.start_date,campaign.end_date,campaign.bidding_strategy_type,campaign.target_spend.cpc_bid_ceiling_micros,campaign_budget.amount_micros,campaign_budget.delivery_method\n' +
+      '24381766319,"DPT | Search | Brand + Products | Fall 2026",ENABLED,2026-10-22,2026-12-21,MAXIMIZE_CLICKS,1250000,7140000,STANDARD\n',
+    conversion_actions: 'conversion_action.name,conversion_action.status,conversion_action.type,conversion_action.primary_for_goal,conversion_action.category\n' +
+      'Google Shopping App Purchase,ENABLED,,true,PURCHASE\nAdd to cart,ENABLED,,false,ADD_TO_CART\nBegin checkout,ENABLED,,false,BEGIN_CHECKOUT\nAdd payment info,ENABLED,,false,\nPage view,ENABLED,,false,PAGE_VIEW\nView item,ENABLED,,false,\nSearch,ENABLED,,false,\n',
+    negatives: '',
+    shared_negatives: 'shared_set.name,shared_criterion.keyword.text,shared_criterion.keyword.match_type\n' +
+      ['jobs', 'careers', 'hiring', 'salary', 'diamond painting', 'jewelry', 'ring', 'rings', 'blade', 'drill', 'saw', 'grinding', 'concrete', 'dental', 'nail', 'nails', 'diamond like carbon', 'dlc', 'knife', 'sharpener']
+        .map(function (t) { return '"DPT | Search negatives",' + t + ',' + (t.indexOf(' ') > -1 ? 'PHRASE' : 'BROAD'); }).join('\n') + '\n'
+  };
+  var FALLBACK_TOTALS = { impressions: 199, clicks: 32, cost: 38.51, conv: 4, value: 435 };
+  var FALLBACK_DEVICES = { MOBILE: 0.79 };
+  var FALLBACK_TERMS = ['Diamond Fusion', 'ECP Plus', 'Pinnacle Black Label', 'C6', 'graphene', 'diamond plate', 'shower glass'];
+
+  // ---------- helpers ----------
+  function $(id) { return document.getElementById(id); }
+  function el(tag, attrs) {
+    var n = document.createElement(tag);
+    if (attrs) for (var k in attrs) {
+      if (k === 'class') n.className = attrs[k];
+      else if (k === 'text') n.textContent = attrs[k];
+      else n.setAttribute(k, attrs[k]);
+    }
+    for (var i = 2; i < arguments.length; i++) {
+      var c = arguments[i];
+      if (c == null) continue;
+      n.appendChild(c.nodeType ? c : document.createTextNode(String(c)));
+    }
+    return n;
+  }
+  function clear(n) { while (n.firstChild) n.removeChild(n.firstChild); return n; }
+  var SVG = 'http://www.w3.org/2000/svg';
+  function svg(tag, attrs) {
+    var n = document.createElementNS(SVG, tag);
+    if (attrs) for (var k in attrs) n.setAttribute(k, attrs[k]);
+    return n;
+  }
+
+  function parseCSV(text) {
+    var rows = [], row = [], field = '', q = false, i = 0, c;
+    text = String(text || '');
+    if (text.charCodeAt(0) === 0xFEFF) text = text.slice(1);
+    while (i < text.length) {
+      c = text[i];
+      if (q) {
+        if (c === '"') { if (text[i + 1] === '"') { field += '"'; i += 2; continue; } q = false; i++; continue; }
+        field += c; i++; continue;
+      }
+      if (c === '"') { q = true; i++; continue; }
+      if (c === ',') { row.push(field); field = ''; i++; continue; }
+      if (c === '\r') { i++; continue; }
+      if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; i++; continue; }
+      field += c; i++;
+    }
+    if (field.length || row.length) { row.push(field); rows.push(row); }
+    return rows.filter(function (r) { return r.some(function (v) { return String(v).trim() !== ''; }); });
+  }
+  function norm(h) { return String(h || '').trim().toLowerCase().replace(/^"|"$/g, '').replace(/\s+/g, ' '); }
+  function objects(csv) {
+    var rows = parseCSV(csv);
+    if (rows.length < 2) return [];
+    var head = rows[0].map(norm), out = [];
+    for (var i = 1; i < rows.length; i++) {
+      var o = {}, r = rows[i];
+      for (var j = 0; j < head.length; j++) o[head[j]] = r[j] == null ? '' : String(r[j]).trim();
+      out.push(o);
+    }
+    return out;
+  }
+  function keyOf(o, names) {
+    var keys = Object.keys(o);
+    for (var a = 0; a < names.length; a++) {
+      var n = names[a];
+      for (var b = 0; b < keys.length; b++) {
+        var k = keys[b];
+        if (k === n || k.slice(-(n.length + 1)) === '.' + n) return k;
+      }
+    }
+    return null;
+  }
+  function get(o, names) { var k = keyOf(o, names); return k == null ? '' : o[k]; }
+  function toNum(v) {
+    if (v == null) return null;
+    var s = String(v).trim();
+    if (s === '' || s === '--') return null;
+    s = s.replace(/[$,%\s]/g, '');
+    var n = parseFloat(s);
+    return isNaN(n) ? null : n;
+  }
+  function num(v) { var n = toNum(v); return n == null ? 0 : n; }
+  function moneyOf(o, names) {
+    var k = keyOf(o, names);
+    if (k == null) return 0;
+    var n = num(o[k]);
+    return k.indexOf('micros') > -1 ? n / 1e6 : n;
+  }
+  var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function isoDate(v) {
+    var s = String(v || '').trim(), m;
+    if ((m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/))) return m[1] + '-' + pad(+m[2]) + '-' + pad(+m[3]);
+    if ((m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/))) return m[3] + '-' + pad(+m[1]) + '-' + pad(+m[2]);
+    if ((m = s.match(/^Date\((\d{4}),(\d{1,2}),(\d{1,2})/))) return m[1] + '-' + pad(+m[2] + 1) + '-' + pad(+m[3]);
+    if ((m = s.match(/^(\d{4})(\d{2})(\d{2})$/))) return m[1] + '-' + m[2] + '-' + m[3];
+    var d = new Date(s);
+    if (!isNaN(d.getTime())) return d.getUTCFullYear() + '-' + pad(d.getUTCMonth() + 1) + '-' + pad(d.getUTCDate());
+    return '';
+  }
+  function addDays(iso, n) {
+    var p = iso.split('-').map(Number);
+    var d = new Date(Date.UTC(p[0], p[1] - 1, p[2] + n));
+    return d.getUTCFullYear() + '-' + pad(d.getUTCMonth() + 1) + '-' + pad(d.getUTCDate());
+  }
+  function daysBetween(a, b) {
+    var pa = a.split('-').map(Number), pb = b.split('-').map(Number);
+    return Math.round((Date.UTC(pb[0], pb[1] - 1, pb[2]) - Date.UTC(pa[0], pa[1] - 1, pa[2])) / 86400000);
+  }
+  function dShort(iso) { var p = iso.split('-'); return MONTHS[+p[1] - 1] + ' ' + (+p[2]); }
+  function dLong(iso) { var p = iso.split('-'); return MONTHS[+p[1] - 1] + ' ' + (+p[2]) + ', ' + p[0]; }
+  function rangeText(from, to) {
+    if (!from || !to) return '';
+    if (from === to) return dLong(from);
+    return from.slice(0, 4) === to.slice(0, 4) ? dShort(from) + ' to ' + dLong(to) : dLong(from) + ' to ' + dLong(to);
+  }
+  function money(v, cents) {
+    var n = Math.round(v * 100) / 100;
+    var opts = (cents === false && Math.abs(n - Math.round(n)) < 0.005) ? { minimumFractionDigits: 0, maximumFractionDigits: 0 } : { minimumFractionDigits: 2, maximumFractionDigits: 2 };
+    return (n < 0 ? '-$' : '$') + Math.abs(n).toLocaleString('en-US', opts);
+  }
+  function int(v) { return Math.round(v).toLocaleString('en-US'); }
+  function count(v) { return Math.abs(v - Math.round(v)) < 0.05 ? int(v) : (Math.round(v * 10) / 10).toLocaleString('en-US'); }
+  function pct(v, d) { if (v == null || !isFinite(v)) return '·'; var f = Math.pow(10, d == null ? 1 : d); return (Math.round(v * 100 * f) / f).toLocaleString('en-US', { minimumFractionDigits: d == null ? 1 : d, maximumFractionDigits: d == null ? 1 : d }) + '%'; }
+  function ratio(v) { if (v == null || !isFinite(v)) return '·'; return (v >= 10 ? Math.round(v) : Math.round(v * 10) / 10) + '×'; }
+  function humanize(s) {
+    s = String(s || '').trim();
+    if (!s) return '';
+    return s.toLowerCase().replace(/_/g, ' ').replace(/^./, function (c) { return c.toUpperCase(); });
+  }
+  function fmtStamp(raw) {
+    var m = String(raw || '').match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{1,2}):(\d{2})/);
+    if (!m) return raw || '';
+    var h = +m[4], ap = h >= 12 ? 'PM' : 'AM';
+    h = h % 12; if (h === 0) h = 12;
+    return dLong(m[1] + '-' + m[2] + '-' + m[3]) + ', ' + h + ':' + m[5] + ' ' + ap + ' ET';
+  }
+  function stampAgeMinutes(raw) {
+    var m = String(raw || '').match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{1,2}):(\d{2})/);
+    if (!m) return null;
+    try {
+      var parts = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date());
+      var v = {};
+      parts.forEach(function (p) { v[p.type] = p.value; });
+      var now = Date.UTC(+v.year, +v.month - 1, +v.day, +v.hour % 24, +v.minute);
+      var then = Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4], +m[5]);
+      return Math.round((now - then) / 60000);
+    } catch (e) { return null; }
+  }
+
+  // ---------- model ----------
+  var model = null;
+  var range = { kind: 'launch', from: '', to: '' };
+
+  function buildModel(raw, fallback) {
+    var metaRows = parseCSV(raw.meta || ''), meta = {};
+    metaRows.forEach(function (r) { if (r.length >= 2) meta[norm(r[0])] = String(r[1]).trim(); });
+
+    var daily = objects(raw.daily || '').map(function (r) {
+      return {
+        date: isoDate(get(r, ['segments.date', 'date', 'day'])),
+        campaign: get(r, ['campaign.name', 'campaign']),
+        impressions: num(get(r, ['metrics.impressions', 'impressions', 'impr.'])),
+        clicks: num(get(r, ['metrics.clicks', 'clicks'])),
+        cost: moneyOf(r, ['metrics.cost_micros', 'cost_micros', 'cost']),
+        conv: num(get(r, ['metrics.conversions', 'conversions'])),
+        value: num(get(r, ['metrics.conversions_value', 'conversions_value', 'conv. value']))
+      };
+    }).filter(function (d) { return d.date; }).sort(function (a, b) { return a.date < b.date ? -1 : 1; });
+
+    function metricRows(csv, extra) {
+      return objects(csv || '').map(function (r) {
+        var o = {
+          date: isoDate(get(r, ['segments.date', 'date'])),
+          impressions: num(get(r, ['metrics.impressions', 'impressions'])),
+          clicks: num(get(r, ['metrics.clicks', 'clicks'])),
+          cost: moneyOf(r, ['metrics.cost_micros', 'cost_micros', 'cost']),
+          conv: toNum(get(r, ['metrics.conversions', 'conversions'])),
+          value: num(get(r, ['metrics.conversions_value', 'conversions_value']))
+        };
+        extra(o, r);
+        return o;
+      });
+    }
+    var keywords = metricRows(raw.keywords, function (o, r) {
+      o.text = get(r, ['ad_group_criterion.keyword.text', 'keyword.text', 'keyword']);
+      o.match = get(r, ['ad_group_criterion.keyword.match_type', 'keyword.match_type', 'match type', 'match_type']).toUpperCase();
+      o.status = get(r, ['ad_group_criterion.status', 'status']);
+    }).filter(function (o) { return o.text; });
+    var terms = metricRows(raw.search_terms, function (o, r) {
+      o.term = get(r, ['search_term_view.search_term', 'search_term', 'search term']);
+      o.keyword = get(r, ['segments.keyword.info.text', 'keyword.info.text', 'keyword']);
+      o.match = get(r, ['segments.keyword.info.match_type', 'keyword.info.match_type', 'match_type']).toUpperCase();
+    }).filter(function (o) { return o.term; });
+    var devices = metricRows(raw.devices, function (o, r) {
+      o.device = get(r, ['segments.device', 'device']).toUpperCase();
+    }).filter(function (o) { return o.device; });
+
+    var campaigns = objects(raw.campaigns || '').map(function (r) {
+      return {
+        id: get(r, ['campaign.id', 'id']),
+        name: get(r, ['campaign.name', 'name']),
+        status: get(r, ['campaign.status', 'status']),
+        start: isoDate(get(r, ['campaign.start_date', 'start_date'])),
+        end: isoDate(get(r, ['campaign.end_date', 'end_date'])),
+        bidding: get(r, ['campaign.bidding_strategy_type', 'bidding_strategy_type']),
+        cpcCap: moneyOf(r, ['campaign.target_spend.cpc_bid_ceiling_micros', 'cpc_bid_ceiling_micros']),
+        budget: moneyOf(r, ['campaign_budget.amount_micros', 'amount_micros', 'budget']),
+        delivery: get(r, ['campaign_budget.delivery_method', 'delivery_method'])
+      };
+    }).filter(function (c) { return c.name; });
+    var actions = objects(raw.conversion_actions || '').map(function (r) {
+      return {
+        name: get(r, ['conversion_action.name', 'name']),
+        status: get(r, ['conversion_action.status', 'status']),
+        type: get(r, ['conversion_action.type', 'type']),
+        primary: /^(true|yes|1|primary)$/i.test(get(r, ['conversion_action.primary_for_goal', 'primary_for_goal', 'primary'])),
+        category: get(r, ['conversion_action.category', 'category'])
+      };
+    }).filter(function (a) { return a.name; });
+    var negatives = objects(raw.negatives || '').map(function (r) {
+      return { text: get(r, ['campaign_criterion.keyword.text', 'keyword.text', 'keyword']), match: get(r, ['campaign_criterion.keyword.match_type', 'match_type']).toUpperCase(), where: get(r, ['campaign.name']) || 'campaign' };
+    }).concat(objects(raw.shared_negatives || '').map(function (r) {
+      return { text: get(r, ['shared_criterion.keyword.text', 'keyword.text', 'keyword']), match: get(r, ['shared_criterion.keyword.match_type', 'match_type']).toUpperCase(), where: get(r, ['shared_set.name']) || 'shared list' };
+    })).filter(function (n) { return n.text; });
+
+    var dates = daily.map(function (d) { return d.date; });
+    var start = isoDate(meta.start_date) || (dates.length ? dates[0] : '2026-10-19');
+    var through = isoDate(meta.through_date) || (dates.length ? dates[dates.length - 1] : start);
+    var budget = CONFIG.budgetPerDay;
+    campaigns.forEach(function (c) { if (c.budget > 0 && /ENABLED/i.test(c.status || 'ENABLED')) budget = c.budget; });
+    if (campaigns.length === 1 && campaigns[0].budget > 0) budget = campaigns[0].budget;
+
+    return {
+      fallback: !!fallback, meta: meta, lastUpdated: meta.last_updated || '', start: start, through: through, budget: budget,
+      daily: daily, keywords: keywords, terms: terms, devices: devices, campaigns: campaigns, actions: actions, negatives: negatives,
+      dated: { keywords: keywords.some(function (k) { return k.date; }), terms: terms.some(function (k) { return k.date; }), devices: devices.some(function (k) { return k.date; }) }
+    };
+  }
+
+  function resolveRange(kind) {
+    var to = model.through, from = model.start, r = { kind: kind, from: from, to: to, label: 'Since launch' };
+    if (kind === 'd7') { r.from = addDays(to, -6); r.label = 'Last 7 days'; }
+    if (kind === 'd30') { r.from = addDays(to, -29); r.label = 'Last 30 days'; }
+    if (kind === 'custom') {
+      var f = isoDate($('from').value), t = isoDate($('to').value);
+      if (f && t && f <= t) { r.from = f; r.to = t; } else { r.from = from; r.to = to; }
+      r.label = 'Custom range';
+    }
+    if (r.from < model.start) r.from = model.start;
+    if (r.to > model.through) r.to = model.through;
+    if (r.from > r.to) r.from = r.to;
+    return r;
+  }
+  function inRange(d) { return d >= range.from && d <= range.to; }
+  function sum(rows) {
+    var t = { impressions: 0, clicks: 0, cost: 0, conv: 0, value: 0, convKnown: false };
+    rows.forEach(function (r) {
+      t.impressions += r.impressions || 0; t.clicks += r.clicks || 0; t.cost += r.cost || 0; t.value += r.value || 0;
+      if (r.conv != null) { t.conv += r.conv; t.convKnown = true; }
+    });
+    return t;
+  }
+  function sliced(rows, dated) { return dated ? rows.filter(function (r) { return inRange(r.date); }) : rows; }
+  function groupBy(rows, keyFn, init) {
+    var map = {}, order = [];
+    rows.forEach(function (r) {
+      var k = keyFn(r);
+      if (!map[k]) { map[k] = init(r); map[k].rows = []; order.push(k); }
+      map[k].rows.push(r);
+    });
+    return order.map(function (k) { var g = map[k]; var t = sum(g.rows); for (var p in t) g[p] = t[p]; return g; });
+  }
+  function isLaunch() { return range.from === model.start && range.to === model.through; }
+  function windowText() { return isLaunch() ? 'since launch, ' + rangeText(model.start, model.through) : rangeText(range.from, range.to); }
+
+  // ---------- rendering ----------
+  function renderAll() {
+    range = resolveRange(range.kind);
+    var dailyRows = model.daily.filter(function (d) { return inRange(d.date); });
+    var totals = (model.daily.length ? sum(dailyRows) : null);
+    if (!totals && model.fallback && isLaunch()) totals = { impressions: FALLBACK_TOTALS.impressions, clicks: FALLBACK_TOTALS.clicks, cost: FALLBACK_TOTALS.cost, conv: FALLBACK_TOTALS.conv, value: FALLBACK_TOTALS.value, convKnown: true };
+    if (!totals) totals = { impressions: 0, clicks: 0, cost: 0, conv: 0, value: 0, convKnown: true };
+
+    renderMeta();
+    renderKF(totals);
+    renderChart(dailyRows);
+    renderKeywords();
+    renderTerms();
+    renderDevices();
+    renderHousekeeping();
+    renderFootnotes();
+    $('pill-range').textContent = range.label + ' · ' + rangeText(range.from, range.to);
+    $('pf-left').textContent = 'Diamond ProTech Performance · ' + rangeText(range.from, range.to);
+  }
+
+  function renderMeta() {
+    var stamp = model.fallback ? 'Figures read ' + fmtStamp(model.lastUpdated) : 'Last updated ' + fmtStamp(model.lastUpdated);
+    $('meta').textContent = stamp + ' · Google Ads account ' + CONFIG.account + ' · Prepared by Etinger Initiatives';
+    $('foot-line').textContent = 'Figures from Google Ads account ' + CONFIG.account + ', refreshed hourly by a script in the account; last refresh ' + fmtStamp(model.lastUpdated) + '.';
+    $('pf-right').textContent = 'Refreshed hourly from Google Ads account ' + CONFIG.account + ' · last refresh ' + fmtStamp(model.lastUpdated) + ' · Prepared by Etinger Initiatives';
+    var notice = $('notice');
+    notice.className = 'notice';
+    notice.textContent = '';
+    if (model.fallback) {
+      notice.textContent = 'Feed unavailable, showing figures from ' + CONFIG.fallbackReadLabel + '.';
+      notice.classList.add('on');
+    } else {
+      var age = stampAgeMinutes(model.lastUpdated);
+      if (age != null && age > 180) {
+        notice.textContent = 'The last refresh was ' + Math.round(age / 60) + ' hours ago. The feed refreshes hourly, so the script in the account may need a look.';
+        notice.classList.add('on', 'quiet');
+      }
+    }
+  }
+
+  function renderKF(t) {
+    $('kf-spent').textContent = money(t.cost);
+    $('kf-clicks').textContent = int(t.clicks);
+    $('kf-ctr').textContent = t.impressions ? pct(t.clicks / t.impressions) : '·';
+    $('kf-purchases').textContent = t.convKnown ? count(t.conv) : '·';
+    $('kf-value').textContent = money(t.value, false);
+    $('kf-return').textContent = t.cost > 0 ? ratio(t.value / t.cost) : '·';
+    $('kf-source').firstChild.textContent = 'Google Ads account ' + CONFIG.account + ', ' + windowText() + ', refreshed hourly.';
+  }
+
+  function renderChart(rows) {
+    var host = clear($('chart'));
+    var note = $('chart-note');
+    note.className = 'notice quiet';
+    note.textContent = '';
+    clear($('daily-table')).classList.add('hidden');
+    $('table-toggle').textContent = 'Show as table';
+    $('chart-source').firstChild.textContent = 'Google Ads, campaign report by day, ' + windowText() + ', refreshed hourly. Budget line at ' + money(model.budget) + ' a day.';
+
+    if (!model.daily.length) {
+      $('legend').classList.add('hidden');
+      $('table-toggle').parentNode.classList.add('hidden');
+      note.textContent = model.fallback
+        ? 'Daily figures arrive with the feed. Over the window the campaign spent about $2.75 a day of the ' + money(model.budget) + ' budget, read ' + CONFIG.fallbackReadLabel + '.'
+        : 'No daily rows in the feed yet.';
+      note.classList.add('on');
+      return;
+    }
+    $('legend').classList.remove('hidden');
+    $('table-toggle').parentNode.classList.remove('hidden');
+
+    var byDate = {};
+    rows.forEach(function (r) {
+      var d = byDate[r.date] || (byDate[r.date] = { date: r.date, impressions: 0, clicks: 0, cost: 0, conv: 0, value: 0 });
+      d.impressions += r.impressions; d.clicks += r.clicks; d.cost += r.cost; d.conv += r.conv; d.value += r.value;
+    });
+    var days = [];
+    for (var i = 0; i <= daysBetween(range.from, range.to); i++) {
+      var iso = addDays(range.from, i);
+      days.push(byDate[iso] || { date: iso, impressions: 0, clicks: 0, cost: 0, conv: 0, value: 0 });
+    }
+    host._days = days;
+
+    var W = Math.max(300, host.clientWidth || 880), isPrint = window.matchMedia && window.matchMedia('print').matches;
+    if (isPrint) W = Math.min(W, 680);
+    var L = 44, R = 10, top = 14, plotH = 170, plotBottom = top + plotH, labelY = plotBottom + 20, trackY = plotBottom + 50, H = trackY + 16;
+    var plotW = W - L - R, n = days.length, band = plotW / n;
+    var barW = Math.min(24, Math.max(2, band - 2));
+    var maxSpend = Math.max.apply(null, days.map(function (d) { return d.cost; }).concat([model.budget]));
+    var yMax = niceCeil(maxSpend * 1.15);
+    var step = niceStep(yMax);
+    function y(v) { return plotBottom - (v / yMax) * plotH; }
+    function x(i) { return L + i * band; }
+
+    var s = svg('svg', { viewBox: '0 0 ' + W + ' ' + H, width: W, height: H, role: 'img', 'aria-label': 'Daily spend as bars against the budget line, with purchases as dots under each day' });
+    // gridlines and y ticks
+    for (var v = 0; v <= yMax + 1e-9; v += step) {
+      s.appendChild(svg('line', { class: 'grid', x1: L, x2: W - R, y1: y(v), y2: y(v) }));
+      var tick = svg('text', { class: 'axis num', x: L - 6, y: y(v) + 4, 'text-anchor': 'end' });
+      tick.textContent = money(v, false);
+      s.appendChild(tick);
+    }
+    // bars
+    var peak = -1, peakV = 0;
+    days.forEach(function (d, i) { if (d.cost > peakV) { peakV = d.cost; peak = i; } });
+    days.forEach(function (d, i) {
+      var g = svg('g');
+      var hit = svg('rect', { class: 'hit', x: x(i), y: top - 8, width: band, height: H - top, tabindex: '0', role: 'img',
+        'aria-label': dLong(d.date) + ': spent ' + money(d.cost) + ', ' + int(d.clicks) + ' clicks, ' + count(d.conv) + ' purchases, ' + money(d.value, false) + ' in orders' });
+      g.appendChild(hit);
+      var bx = x(i) + (band - barW) / 2, by = y(d.cost), h = plotBottom - by;
+      var r = Math.min(4, barW / 2, h);
+      var path = h <= 0 ? '' : 'M' + bx + ',' + plotBottom + ' L' + bx + ',' + (by + r) + ' Q' + bx + ',' + by + ' ' + (bx + r) + ',' + by + ' L' + (bx + barW - r) + ',' + by + ' Q' + (bx + barW) + ',' + by + ' ' + (bx + barW) + ',' + (by + r) + ' L' + (bx + barW) + ',' + plotBottom + ' Z';
+      var bar = svg('path', { class: 'bar', d: path });
+      g.appendChild(bar);
+      if (i === peak && peakV > 0 && band >= 18) {
+        var lbl = svg('text', { class: 'peak num', x: bx + barW / 2, y: by - 6, 'text-anchor': 'middle' });
+        lbl.textContent = money(d.cost);
+        s.appendChild(lbl);
+      }
+      // purchases dots under the day
+      var c = Math.round(d.conv);
+      if (d.conv > 0 && c === 0) c = 1;
+      var shown = Math.min(c, 3);
+      for (var k = 0; k < shown; k++) g.appendChild(svg('circle', { class: 'dot', cx: x(i) + band / 2, cy: trackY - k * 9, r: 4 }));
+      if (c > 3) { var more = svg('text', { class: 'axis num', x: x(i) + band / 2 + 7, y: trackY + 4 }); more.textContent = c; g.appendChild(more); }
+      hit.addEventListener('mouseenter', function () { showTip(d, i); bar.classList.add('on'); });
+      hit.addEventListener('mouseleave', function () { hideTip(); bar.classList.remove('on'); });
+      hit.addEventListener('focus', function () { showTip(d, i); bar.classList.add('on'); });
+      hit.addEventListener('blur', function () { hideTip(); bar.classList.remove('on'); });
+      s.appendChild(g);
+    });
+    // budget line
+    s.appendChild(svg('line', { class: 'budget', x1: L, x2: W - R, y1: y(model.budget), y2: y(model.budget) }));
+    var bl = svg('text', { class: 'budget-label num', x: W - R, y: y(model.budget) - 5, 'text-anchor': 'end' });
+    bl.textContent = 'Budget ' + money(model.budget);
+    s.appendChild(bl);
+    // baseline
+    s.appendChild(svg('line', { class: 'grid', x1: L, x2: W - R, y1: plotBottom, y2: plotBottom }));
+    // x labels
+    var every = Math.max(1, Math.ceil(46 / band)), lastLabelX = -1e9;
+    days.forEach(function (d, i) {
+      var isLast = i === n - 1;
+      if (i % every !== 0 && !isLast) return;
+      var cx = x(i) + band / 2;
+      if (isLast && cx - lastLabelX < 40) return;
+      var t = svg('text', { class: 'axis', x: cx, y: labelY, 'text-anchor': 'middle' });
+      t.textContent = dShort(d.date);
+      s.appendChild(t);
+      lastLabelX = cx;
+    });
+    host.appendChild(s);
+
+    var tip = el('div', { class: 'tip', role: 'status' });
+    host.appendChild(tip);
+    function showTip(d, i) {
+      clear(tip);
+      tip.appendChild(el('b', { text: dLong(d.date) }));
+      [['Spent', money(d.cost)], ['Clicks', int(d.clicks)], ['Impressions', int(d.impressions)], ['Purchases', count(d.conv)], ['In orders', money(d.value, false)]].forEach(function (p) {
+        tip.appendChild(el('div', null, el('span', { text: p[0] }), el('strong', { class: 'num', text: p[1] })));
+      });
+      tip.classList.add('on');
+      var cx = (x(i) + band / 2) * (host.clientWidth / W), tw = tip.offsetWidth;
+      var left = Math.max(0, Math.min(host.clientWidth - tw, cx - tw / 2));
+      tip.style.left = left + 'px';
+      tip.style.top = Math.max(0, (y(d.cost) * (host.clientWidth / W)) - tip.offsetHeight - 10) + 'px';
+    }
+    function hideTip() { tip.classList.remove('on'); }
+  }
+  function niceCeil(v) {
+    if (v <= 0) return 1;
+    var p = Math.pow(10, Math.floor(Math.log10(v)));
+    var f = v / p;
+    var m = f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10;
+    return m * p;
+  }
+  function niceStep(max) {
+    var raw = max / 4, p = Math.pow(10, Math.floor(Math.log10(raw))), f = raw / p;
+    var m = f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10;
+    return m * p;
+  }
+  function renderDailyTable() {
+    var host = clear($('daily-table')), days = $('chart')._days || [];
+    var tbl = el('table'), thead = el('thead'), tr = el('tr');
+    [['Date', ''], ['Spent', 'num'], ['Impressions', 'num'], ['Clicks', 'num'], ['Purchases', 'num'], ['In orders', 'num']].forEach(function (h) { tr.appendChild(el('th', { class: h[1], text: h[0] })); });
+    thead.appendChild(tr); tbl.appendChild(thead);
+    var tb = el('tbody');
+    days.forEach(function (d) {
+      tb.appendChild(el('tr', null, el('td', { text: dLong(d.date) }), el('td', { class: 'num', text: money(d.cost) }), el('td', { class: 'num', text: int(d.impressions) }), el('td', { class: 'num', text: int(d.clicks) }), el('td', { class: 'num', text: count(d.conv) }), el('td', { class: 'num', text: money(d.value, false) })));
+    });
+    tbl.appendChild(tb);
+    host.appendChild(tbl);
+  }
+
+  function matchText(text, match) {
+    if (match === 'EXACT') return '[' + text + ']';
+    if (match === 'PHRASE') return '"' + text + '"';
+    return text;
+  }
+  function matchWord(match) { return match === 'EXACT' ? 'Exact' : match === 'PHRASE' ? 'Phrase' : match === 'BROAD' ? 'Broad' : humanize(match); }
+
+  function table(headers, rows, emptyText) {
+    var tbl = el('table'), thead = el('thead'), tr = el('tr');
+    headers.forEach(function (h) { tr.appendChild(el('th', { class: h[1] || '', text: h[0] })); });
+    thead.appendChild(tr); tbl.appendChild(thead);
+    var tb = el('tbody');
+    if (!rows.length) tb.appendChild(el('tr', { class: 'empty' }, el('td', { colspan: String(headers.length), text: emptyText })));
+    rows.forEach(function (r) { tb.appendChild(r); });
+    tbl.appendChild(tb);
+    return tbl;
+  }
+  function cell(text, cls) { return el('td', { class: cls || '', text: text }); }
+
+  function renderKeywords() {
+    var rows = sliced(model.keywords, model.dated.keywords);
+    var groups = groupBy(rows, function (r) { return r.match + '|' + r.text.toLowerCase(); }, function (r) { return { text: r.text, match: r.match }; })
+      .filter(function (g) { return g.impressions > 0 || g.cost > 0 || g.clicks > 0; })
+      .sort(function (a, b) { return b.cost - a.cost || b.clicks - a.clicks; });
+    var trs = groups.map(function (g) {
+      return el('tr', null, cell(matchText(g.text, g.match)), cell(matchWord(g.match), 'muted'), cell(money(g.cost), 'num'), cell(int(g.clicks), 'num'),
+        cell(g.impressions ? pct(g.clicks / g.impressions) : '·', 'num'), cell(g.convKnown ? count(g.conv) : '·', 'num'));
+    });
+    clear($('kw-table')).appendChild(table([['Keyword'], ['Match'], ['Cost', 'num'], ['Clicks', 'num'], ['Click-through', 'num'], ['Purchases', 'num']], trs, 'No keyword figures in this range.'));
+    var scope = model.dated.keywords ? windowText() : 'since launch, ' + rangeText(model.start, model.through);
+    var extra = model.fallback && !groups.some(function (g) { return g.convKnown; }) ? ' Purchases by keyword arrive with the feed.' : '';
+    $('kw-source').firstChild.textContent = 'Google Ads, search keywords, ' + scope + '. Brackets mark exact matches, quotes mark phrase matches.' + extra;
+  }
+
+  function negHits(term) {
+    var t = String(term || '').toLowerCase();
+    return CONFIG.recommended.filter(function (w) { return new RegExp('(^|[^a-z0-9])' + w + '([^a-z0-9]|$)', 'i').test(t); });
+  }
+  function renderTerms() {
+    var host = clear($('st-table'));
+    var rows = sliced(model.terms, model.dated.terms);
+    var scope = model.dated.terms ? windowText() : 'since launch, ' + rangeText(model.start, model.through);
+    if (!model.terms.length && model.fallback) {
+      var p = el('p', { class: 'caption' }, 'Search terms arrive with the feed. On ' + CONFIG.fallbackReadLabel + ' the terms leaking to other products were ');
+      FALLBACK_TERMS.forEach(function (t, i) {
+        p.appendChild(el('span', { class: 'chip chip-neg', text: t }));
+        p.appendChild(document.createTextNode(i < FALLBACK_TERMS.length - 1 ? ' ' : '.'));
+      });
+      p.className = 'hk-row';
+      host.appendChild(p);
+      $('st-source').firstChild.textContent = 'Google Ads, search terms report, read ' + CONFIG.fallbackReadLabel + '.';
+    } else {
+      var groups = groupBy(rows, function (r) { return r.term.toLowerCase(); }, function (r) { return { term: r.term, keyword: r.keyword, match: r.match }; })
+        .sort(function (a, b) { return b.cost - a.cost || b.clicks - a.clicks || b.impressions - a.impressions; }).slice(0, 12);
+      var trs = groups.map(function (g) {
+        var td = cell(g.term);
+        negHits(g.term).forEach(function (w) { td.appendChild(el('span', { class: 'chip chip-neg chip-sm', text: w })); });
+        return el('tr', null, td, cell(g.keyword ? matchText(g.keyword, g.match) : '·', 'muted'), cell(money(g.cost), 'num'), cell(int(g.clicks), 'num'), cell(g.convKnown ? count(g.conv) : '·', 'num'));
+      });
+      host.appendChild(table([['Search term'], ['Matched keyword'], ['Cost', 'num'], ['Clicks', 'num'], ['Purchases', 'num']], trs, 'No search terms in this range.'));
+      $('st-source').firstChild.textContent = 'Google Ads, search terms, top terms by cost, ' + scope + '. A red chip marks a term that matches one of the recommended negatives.';
+    }
+    // recommended negatives: which are in the account already
+    var inAccount = {};
+    model.negatives.forEach(function (n) { inAccount[n.text.toLowerCase()] = true; });
+    var rec = clear($('neg-recommended'));
+    rec.appendChild(el('span', { text: 'Recommended negatives, pending approval' }));
+    var chips = el('span', { class: 'chips' });
+    CONFIG.recommended.forEach(function (w) {
+      var done = !!inAccount[w];
+      chips.appendChild(el('span', { class: 'chip ' + (done ? 'chip-ok' : 'chip-neg'), text: done ? w + ' ✓' : w, title: done ? 'Added to the account' : 'Pending approval' }));
+    });
+    rec.appendChild(chips);
+    var acc = clear($('neg-account'));
+    if (model.negatives.length) {
+      acc.appendChild(el('span', { text: 'In the account today, ' + model.negatives.length + ' terms' }));
+      var c2 = el('span', { class: 'chips' });
+      model.negatives.slice().sort(function (a, b) { return a.text.localeCompare(b.text); }).forEach(function (n) { c2.appendChild(el('span', { class: 'chip', text: matchText(n.text, n.match) })); });
+      acc.appendChild(c2);
+    } else {
+      acc.appendChild(el('span', { text: 'No negatives found in the feed.' }));
+    }
+  }
+
+  function renderDevices() {
+    var host = clear($('dev-stats'));
+    var rows = sliced(model.devices, model.dated.devices);
+    var scope = model.dated.devices ? windowText() : 'since launch, ' + rangeText(model.start, model.through);
+    var names = { MOBILE: 'Mobile', DESKTOP: 'Desktop', TABLET: 'Tablet' };
+    var order = ['MOBILE', 'DESKTOP', 'TABLET'];
+    if (!model.devices.length && model.fallback) {
+      order.forEach(function (k) {
+        var share = FALLBACK_DEVICES[k];
+        var block = el('div', { class: 'stat' + (k === 'MOBILE' ? ' hot' : '') }, el('span', { class: 'label', text: names[k] }),
+          el('b', { class: 'num', text: share != null ? pct(share, 0) : '·' }),
+          el('p', { text: share != null ? 'of impressions, read ' + CONFIG.fallbackReadLabel + '. Purchases by device arrive with the feed.' : 'Share arrives with the feed.' }));
+        host.appendChild(block);
+      });
+      $('dev-source').firstChild.textContent = 'Google Ads, campaign report by device, read ' + CONFIG.fallbackReadLabel + '.';
+      return;
+    }
+    var groups = groupBy(rows, function (r) { return r.device; }, function (r) { return { device: r.device }; });
+    var total = sum(rows), hot = '', hotV = -1, other = { impressions: 0, conv: 0 };
+    groups.forEach(function (g) { if (order.indexOf(g.device) < 0) { other.impressions += g.impressions; other.conv += g.conv; } else if (g.impressions > hotV) { hotV = g.impressions; hot = g.device; } });
+    order.forEach(function (k) {
+      var g = groups.filter(function (x) { return x.device === k; })[0] || { impressions: 0, clicks: 0, cost: 0, conv: 0, value: 0 };
+      var iShare = total.impressions ? g.impressions / total.impressions : null;
+      var pShare = total.conv ? g.conv / total.conv : null;
+      var text = (iShare != null ? pct(iShare, 0) + ' of impressions' : 'No impressions') + ' · ' + (pShare != null ? pct(pShare, 0) + ' of purchases' : 'no purchases yet') + ' · ' + money(g.cost) + ' spent';
+      host.appendChild(el('div', { class: 'stat' + (k === hot ? ' hot' : '') }, el('span', { class: 'label', text: names[k] }), el('b', { class: 'num', text: iShare != null ? pct(iShare, 0) : '·' }), el('p', { text: text })));
+    });
+    var otherText = other.impressions ? ' Other devices: ' + pct(other.impressions / total.impressions, 0) + ' of impressions.' : '';
+    $('dev-source').firstChild.textContent = 'Google Ads, campaign report by device, ' + scope + '.' + otherText;
+  }
+
+  function renderHousekeeping() {
+    var trs = model.actions.slice().sort(function (a, b) { return (b.primary ? 1 : 0) - (a.primary ? 1 : 0) || a.name.localeCompare(b.name); }).map(function (a) {
+      return el('tr', null, cell(a.name), cell(a.primary ? 'Primary' : 'Secondary', a.primary ? '' : 'muted'), cell(humanize(a.status), 'muted'), cell(a.category ? humanize(a.category) : '·', 'muted'));
+    });
+    clear($('ca-table')).appendChild(table([['Conversion action'], ['Goal'], ['Status'], ['Category']], trs, 'No conversion actions in the feed.'));
+    var dl = clear($('campaign-defs'));
+    var cs = model.campaigns.length ? model.campaigns : [{ name: 'DPT | Search | Brand + Products | Fall 2026', status: 'ENABLED', start: '2026-10-22', end: '2026-12-21', bidding: 'MAXIMIZE_CLICKS', cpcCap: 1.25, budget: 7.14, delivery: 'STANDARD' }];
+    cs.forEach(function (c) {
+      dl.appendChild(el('dt', { text: 'Campaign' }));
+      dl.appendChild(el('dd', { text: c.name + (c.status ? ' · ' + humanize(c.status) : '') + (c.start ? ' · ' + rangeText(c.start, c.end || c.start) : '') }));
+      dl.appendChild(el('dt', { text: 'Budget' }));
+      dl.appendChild(el('dd', { text: money(c.budget) + ' a day' + (c.delivery ? ', ' + humanize(c.delivery).toLowerCase() + ' delivery' : '') }));
+      dl.appendChild(el('dt', { text: 'Bidding' }));
+      dl.appendChild(el('dd', { text: humanize(c.bidding) + (c.cpcCap ? ', max cost per click ' + money(c.cpcCap) : '') }));
+    });
+  }
+
+  function renderFootnotes() {
+    var r = rangeText(range.from, range.to);
+    Array.prototype.forEach.call(document.querySelectorAll('.fn-range'), function (n) { n.textContent = r; });
+    Array.prototype.forEach.call(document.querySelectorAll('.fn-window'), function (n) { n.textContent = windowText(); });
+  }
+
+  // ---------- controls ----------
+  function setRange(kind) {
+    range.kind = kind;
+    Array.prototype.forEach.call(document.querySelectorAll('.rangepill'), function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-range') === kind ? 'true' : 'false'); });
+    $('custom').classList.toggle('on', kind === 'custom');
+    renderAll();
+  }
+  function wireControls() {
+    Array.prototype.forEach.call(document.querySelectorAll('.rangepill'), function (b) {
+      b.addEventListener('click', function () { setRange(b.getAttribute('data-range')); });
+    });
+    $('from').addEventListener('change', function () { if (range.kind === 'custom') renderAll(); });
+    $('to').addEventListener('change', function () { if (range.kind === 'custom') renderAll(); });
+    $('export').addEventListener('click', function () { window.print(); });
+    $('table-toggle').addEventListener('click', function () {
+      var t = $('daily-table');
+      if (t.classList.contains('hidden')) { renderDailyTable(); t.classList.remove('hidden'); this.textContent = 'Hide table'; }
+      else { t.classList.add('hidden'); this.textContent = 'Show as table'; }
+    });
+    var title = document.title;
+    window.addEventListener('beforeprint', function () { document.title = 'Diamond ProTech Performance, ' + rangeText(range.from, range.to); renderChart(model.daily.filter(function (d) { return inRange(d.date); })); });
+    window.addEventListener('afterprint', function () { document.title = title; renderChart(model.daily.filter(function (d) { return inRange(d.date); })); });
+    var rt;
+    window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { if (model) renderChart(model.daily.filter(function (d) { return inRange(d.date); })); }, 120); });
+  }
+  function configureControls() {
+    var hasDaily = model.daily.length > 0;
+    Array.prototype.forEach.call(document.querySelectorAll('.rangepill'), function (b) {
+      if (b.getAttribute('data-range') !== 'launch') b.disabled = !hasDaily;
+    });
+    $('from').min = model.start; $('from').max = model.through; $('from').value = model.start;
+    $('to').min = model.start; $('to').max = model.through; $('to').value = model.through;
+  }
+
+  // ---------- load ----------
+  function useData(raw, fallback) {
+    model = buildModel(raw, fallback);
+    if (!model.lastUpdated && !fallback) { useData(FALLBACK, true); return; }
+    configureControls();
+    setRange('launch');
+  }
+  function load() {
+    wireControls();
+    var done = false;
+    var timer = setTimeout(function () { if (!done) { done = true; useData(FALLBACK, true); } }, 12000);
+    fetch('/api/data', { cache: 'no-store' }).then(function (res) {
+      if (!res.ok) throw new Error('status ' + res.status);
+      return res.json();
+    }).then(function (data) {
+      if (done) return;
+      done = true; clearTimeout(timer);
+      if (!data || typeof data !== 'object' || !data.meta || !String(data.meta).trim()) { useData(FALLBACK, true); return; }
+      useData(data, false);
+    }).catch(function () {
+      if (done) return;
+      done = true; clearTimeout(timer);
+      useData(FALLBACK, true);
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', load); else load();
+})();
+</script>
+</body>
+</html>
