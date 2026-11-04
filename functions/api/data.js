@@ -11,7 +11,7 @@ export async function onRequest({ env }) {
     return json(out, 'no-store');
   }
   await Promise.all(TABS.map(async (tab) => {
-    const url = `https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(tab)}`;
+    const url = `https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:csv&headers=1&sheet=${encodeURIComponent(tab)}`;
     try {
       const res = await fetch(url, { cf: { cacheTtl: 300, cacheEverything: true }, redirect: 'follow' });
       const text = res.ok ? await res.text() : '';

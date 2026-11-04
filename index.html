@@ -158,33 +158,22 @@
     account: '979-161-2242',
     budgetPerDay: 7.14,
     recommended: ['fusion', 'ecp', 'pinnacle', 'c6', 'graphene', 'plate', 'shower', 'seal'],
-    fallbackReadLabel: 'Nov 4, 2026'
+    campaignDates: 'scheduled Oct 22 to Dec 21, 2026',
+    fallbackReadLabel: 'Nov 4, 2026, 4:45 PM ET'
   };
 
-  // Built-in figures read in Google Ads on Nov 4, 2026, window Oct 19 to Nov 4. Same shape as /api/data.
+  // Built-in snapshot of the feed, read Nov 4, 2026 at 4:45 PM ET. Same shape as /api/data; keyword, term and device tabs are totals since launch.
   var FALLBACK = {
-    meta: 'last_updated,2026-11-04 00:15 ET\naccount_id,979-161-2242\naccount_timezone,America/New_York\nstart_date,2026-10-19\nthrough_date,2026-11-04\n',
-    daily: '',
-    keywords: 'campaign.name,ad_group.name,ad_group_criterion.keyword.text,ad_group_criterion.keyword.match_type,ad_group_criterion.status,metrics.impressions,metrics.clicks,metrics.cost_micros,metrics.conversions,metrics.conversions_value\n' +
-      '"DPT | Search | Brand + Products | Fall 2026",Ad group 1,diamond protech,EXACT,ENABLED,18,9,11100000,,\n' +
-      '"DPT | Search | Brand + Products | Fall 2026",Ad group 1,diamond car coating,PHRASE,ENABLED,58,6,7080000,,\n' +
-      '"DPT | Search | Brand + Products | Fall 2026",Ad group 1,diamond protech,PHRASE,ENABLED,15,6,6930000,,\n' +
-      '"DPT | Search | Brand + Products | Fall 2026",Ad group 1,diamond pro tech,EXACT,ENABLED,9,4,4930000,,\n' +
-      '"DPT | Search | Brand + Products | Fall 2026",Ad group 1,diamond body coating,PHRASE,ENABLED,36,2,2500000,,\n',
-    search_terms: '',
-    devices: '',
-    campaigns: 'campaign.id,campaign.name,campaign.status,campaign.start_date,campaign.end_date,campaign.bidding_strategy_type,campaign.target_spend.cpc_bid_ceiling_micros,campaign_budget.amount_micros,campaign_budget.delivery_method\n' +
-      '24381766319,"DPT | Search | Brand + Products | Fall 2026",ENABLED,2026-10-22,2026-12-21,MAXIMIZE_CLICKS,1250000,7140000,STANDARD\n',
-    conversion_actions: 'conversion_action.name,conversion_action.status,conversion_action.type,conversion_action.primary_for_goal,conversion_action.category\n' +
-      'Google Shopping App Purchase,ENABLED,,true,PURCHASE\nAdd to cart,ENABLED,,false,ADD_TO_CART\nBegin checkout,ENABLED,,false,BEGIN_CHECKOUT\nAdd payment info,ENABLED,,false,\nPage view,ENABLED,,false,PAGE_VIEW\nView item,ENABLED,,false,\nSearch,ENABLED,,false,\n',
-    negatives: '',
-    shared_negatives: 'shared_set.name,shared_criterion.keyword.text,shared_criterion.keyword.match_type\n' +
-      ['jobs', 'careers', 'hiring', 'salary', 'diamond painting', 'jewelry', 'ring', 'rings', 'blade', 'drill', 'saw', 'grinding', 'concrete', 'dental', 'nail', 'nails', 'diamond like carbon', 'dlc', 'knife', 'sharpener']
-        .map(function (t) { return '"DPT | Search negatives",' + t + ',' + (t.indexOf(' ') > -1 ? 'PHRASE' : 'BROAD'); }).join('\n') + '\n'
-  };
-  var FALLBACK_TOTALS = { impressions: 199, clicks: 32, cost: 38.51, conv: 4, value: 435 };
-  var FALLBACK_DEVICES = { MOBILE: 0.79 };
-  var FALLBACK_TERMS = ['Diamond Fusion', 'ECP Plus', 'Pinnacle Black Label', 'C6', 'graphene', 'diamond plate', 'shower glass'];
+    "meta": "key,value\nlast_updated,2026-11-04 16:45 ET\naccount_id,979-161-2242\naccount_timezone,America/New_York\nstart_date,2026-10-19\nthrough_date,2026-11-04\n",
+    "daily": "segments.date,campaign.name,metrics.impressions,metrics.clicks,metrics.cost_micros,metrics.conversions,metrics.conversions_value\n2026-10-26,DPT | Search | Brand + Products | Fall 2026,2,1,910000,0,0\n2026-10-27,DPT | Search | Brand + Products | Fall 2026,19,1,1030000,0,0\n2026-10-28,DPT | Search | Brand + Products | Fall 2026,21,5,6160000,0,0\n2026-10-29,DPT | Search | Brand + Products | Fall 2026,26,5,6150000,4,434.94\n2026-10-30,DPT | Search | Brand + Products | Fall 2026,33,4,4980000,0,0\n2026-10-31,DPT | Search | Brand + Products | Fall 2026,16,2,2470000,0,0\n2026-11-01,DPT | Search | Brand + Products | Fall 2026,23,4,4910000,0,0\n2026-11-02,DPT | Search | Brand + Products | Fall 2026,24,7,8180000,0,0\n2026-11-03,DPT | Search | Brand + Products | Fall 2026,37,3,3720000,0,0\n2026-11-04,DPT | Search | Brand + Products | Fall 2026,24,4,4820000,0,0\n",
+    "keywords": "ad_group_criterion.keyword.text,ad_group_criterion.keyword.match_type,ad_group_criterion.status,metrics.impressions,metrics.clicks,metrics.cost_micros,metrics.conversions,metrics.conversions_value\ndiamond protech,EXACT,ENABLED,18,9,11100000,2,243.72\ndiamond protech,PHRASE,ENABLED,19,7,8180000,0,0\ndiamond pro tech,EXACT,ENABLED,10,5,6050000,2,191.22\ndiamond car coating,PHRASE,ENABLED,69,7,8300000,0,0\ndiamond pro tech,PHRASE,ENABLED,9,3,3510000,0,0\ndiamond body coating,PHRASE,ENABLED,40,2,2500000,0,0\ndiamondprotech,EXACT,ENABLED,3,2,2470000,0,0\ndiamond glass coating,PHRASE,ENABLED,42,1,1220000,0,0\ndiamond quick body,PHRASE,ENABLED,7,0,0,0,0\nnano diamond coating,PHRASE,ENABLED,4,0,0,0,0\ndiamond wrap coating,PHRASE,ENABLED,3,0,0,0,0\nnanodiamond coating,PHRASE,ENABLED,1,0,0,0,0\n",
+    "search_terms": "search_term_view.search_term,segments.keyword.info.text,segments.keyword.info.match_type,metrics.impressions,metrics.clicks,metrics.cost_micros,metrics.conversions,metrics.conversions_value\ndiamond protech,diamond protech,EXACT,10,7,8680000,2,243.72\ndiamond pro tech,diamond pro tech,EXACT,6,3,3690000,2,191.22\ndiamondprotech,diamondprotech,EXACT,3,2,2470000,0,0\ndiamond ceramic coating,diamond car coating,PHRASE,16,2,2440000,0,0\ndiamond protech ceramic coating,diamond protech,EXACT,5,2,2420000,0,0\ndiamond pro tech ceramic coating,diamond pro tech,EXACT,3,2,2360000,0,0\ndiamond protech ceramic coating,diamond protech,PHRASE,2,2,2340000,0,0\ndiamond body 36,diamond body coating,PHRASE,4,1,1250000,0,0\ndiamond ceramic coating for cars,diamond car coating,PHRASE,3,1,1250000,0,0\ndiamond protech body 36,diamond protech,PHRASE,2,1,1250000,0,0\ndiamond protech body,diamond body coating,PHRASE,1,1,1250000,0,0\ndiamond glass coating,diamond glass coating,PHRASE,5,1,1220000,0,0\ndiamond protech 36,diamond protech,PHRASE,2,1,1220000,0,0\nceramic coating diamond,diamond car coating,PHRASE,1,1,900000,0,0\ndiamond fusion glass coating,diamond glass coating,PHRASE,10,0,0,0,0\ndiamond fusion coating,diamond glass coating,PHRASE,6,0,0,0,0\ndiamond ceramic with graphene,diamond body coating,PHRASE,6,0,0,0,0\necp diamond ceramic coating,diamond car coating,PHRASE,5,0,0,0,0\ndiamond quick body,diamond quick body,PHRASE,4,0,0,0,0\nnano diamond coating,nano diamond coating,PHRASE,3,0,0,0,0\nwhat is diamond coating for cars,diamond car coating,PHRASE,3,0,0,0,0\ndiamond body 36 ceramic coating,diamond body coating,PHRASE,3,0,0,0,0\npinnacle black label diamond ceramic coating pro,diamond car coating,PHRASE,2,0,0,0,0\necp plus diamond ceramic reviews,diamond car coating,PHRASE,2,0,0,0,0\ndiamond glass kit,diamond glass coating,PHRASE,2,0,0,0,0\n",
+    "devices": "segments.device,metrics.impressions,metrics.clicks,metrics.cost_micros,metrics.conversions,metrics.conversions_value\nDESKTOP,48,9,10520000,2,191.22\nMOBILE,174,27,32810000,2,243.72\nTABLET,3,0,0,0,0\n",
+    "campaigns": "campaign.id,campaign.name,campaign.status,campaign.bidding_strategy_type,campaign.target_spend.cpc_bid_ceiling_micros,campaign_budget.amount_micros,campaign_budget.delivery_method\n24381766319,DPT | Search | Brand + Products | Fall 2026,ENABLED,TARGET_SPEND,1250000,7140000,STANDARD\n",
+    "conversion_actions": "conversion_action.name,conversion_action.status,conversion_action.type,conversion_action.primary_for_goal,conversion_action.category\nGoogle Shopping App Purchase,ENABLED,WEBPAGE,TRUE,PURCHASE\nGoogle Shopping App Begin Checkout,ENABLED,WEBPAGE,FALSE,BEGIN_CHECKOUT\nGoogle Shopping App Add To Cart,ENABLED,WEBPAGE,FALSE,ADD_TO_CART\nGoogle Shopping App Page View,ENABLED,WEBPAGE,FALSE,PAGE_VIEW\nGoogle Shopping App View Item,ENABLED,WEBPAGE,FALSE,PAGE_VIEW\nGoogle Shopping App Search,ENABLED,WEBPAGE,FALSE,PAGE_VIEW\nGoogle Shopping App Add Payment Info,ENABLED,WEBPAGE,FALSE,DEFAULT\n",
+    "negatives": "campaign.name,campaign_criterion.keyword.text,campaign_criterion.keyword.match_type\n",
+    "shared_negatives": "shared_set.name,shared_criterion.keyword.text,shared_criterion.keyword.match_type\nDPT | Search negatives,jobs,BROAD\nDPT | Search negatives,knife,BROAD\nDPT | Search negatives,concrete,BROAD\nDPT | Search negatives,jewelry,BROAD\nDPT | Search negatives,nail,BROAD\nDPT | Search negatives,saw,BROAD\nDPT | Search negatives,hiring,BROAD\nDPT | Search negatives,dental,BROAD\nDPT | Search negatives,ring,BROAD\nDPT | Search negatives,drill,BROAD\nDPT | Search negatives,careers,BROAD\nDPT | Search negatives,salary,BROAD\nDPT | Search negatives,sharpener,BROAD\nDPT | Search negatives,rings,BROAD\nDPT | Search negatives,nails,BROAD\nDPT | Search negatives,grinding,BROAD\nDPT | Search negatives,blade,BROAD\nDPT | Search negatives,dlc,BROAD\nDPT | Search negatives,diamond painting,PHRASE\nDPT | Search negatives,diamond like carbon,PHRASE\n"
+};
 
   // ---------- helpers ----------
   function $(id) { return document.getElementById(id); }
@@ -460,9 +449,8 @@
   function renderAll() {
     range = resolveRange(range.kind);
     var dailyRows = model.daily.filter(function (d) { return inRange(d.date); });
-    var totals = (model.daily.length ? sum(dailyRows) : null);
-    if (!totals && model.fallback && isLaunch()) totals = { impressions: FALLBACK_TOTALS.impressions, clicks: FALLBACK_TOTALS.clicks, cost: FALLBACK_TOTALS.cost, conv: FALLBACK_TOTALS.conv, value: FALLBACK_TOTALS.value, convKnown: true };
-    if (!totals) totals = { impressions: 0, clicks: 0, cost: 0, conv: 0, value: 0, convKnown: true };
+    var totals = sum(dailyRows);
+    totals.convKnown = true;
 
     renderMeta();
     renderKF(totals);
@@ -518,9 +506,7 @@
     if (!model.daily.length) {
       $('legend').classList.add('hidden');
       $('table-toggle').parentNode.classList.add('hidden');
-      note.textContent = model.fallback
-        ? 'Daily figures arrive with the feed. Over the window the campaign spent about $2.75 a day of the ' + money(model.budget) + ' budget, read ' + CONFIG.fallbackReadLabel + '.'
-        : 'No daily rows in the feed yet.';
+      note.textContent = 'No daily rows in the feed yet.';
       note.classList.add('on');
       return;
     }
@@ -692,25 +678,18 @@
     var host = clear($('st-table'));
     var rows = sliced(model.terms, model.dated.terms);
     var scope = model.dated.terms ? windowText() : 'since launch, ' + rangeText(model.start, model.through);
-    if (!model.terms.length && model.fallback) {
-      var p = el('p', { class: 'caption' }, 'Search terms arrive with the feed. On ' + CONFIG.fallbackReadLabel + ' the terms leaking to other products were ');
-      FALLBACK_TERMS.forEach(function (t, i) {
-        p.appendChild(el('span', { class: 'chip chip-neg', text: t }));
-        p.appendChild(document.createTextNode(i < FALLBACK_TERMS.length - 1 ? ' ' : '.'));
-      });
-      p.className = 'hk-row';
-      host.appendChild(p);
-      $('st-source').firstChild.textContent = 'Google Ads, search terms report, read ' + CONFIG.fallbackReadLabel + '.';
-    } else {
-      var groups = groupBy(rows, function (r) { return r.term.toLowerCase(); }, function (r) { return { term: r.term, keyword: r.keyword, match: r.match }; })
-        .sort(function (a, b) { return b.cost - a.cost || b.clicks - a.clicks || b.impressions - a.impressions; }).slice(0, 12);
+    {
+      var all = groupBy(rows, function (r) { return r.term.toLowerCase(); }, function (r) { return { term: r.term, keyword: r.keyword, match: r.match }; })
+        .sort(function (a, b) { return b.cost - a.cost || b.clicks - a.clicks || b.impressions - a.impressions; });
+      var groups = all.slice(0, 12);
+      all.slice(12).filter(function (g) { return negHits(g.term).length; }).slice(0, 8).forEach(function (g) { groups.push(g); });
       var trs = groups.map(function (g) {
         var td = cell(g.term);
         negHits(g.term).forEach(function (w) { td.appendChild(el('span', { class: 'chip chip-neg chip-sm', text: w })); });
         return el('tr', null, td, cell(g.keyword ? matchText(g.keyword, g.match) : '·', 'muted'), cell(money(g.cost), 'num'), cell(int(g.clicks), 'num'), cell(g.convKnown ? count(g.conv) : '·', 'num'));
       });
       host.appendChild(table([['Search term'], ['Matched keyword'], ['Cost', 'num'], ['Clicks', 'num'], ['Purchases', 'num']], trs, 'No search terms in this range.'));
-      $('st-source').firstChild.textContent = 'Google Ads, search terms, top terms by cost, ' + scope + '. A red chip marks a term that matches one of the recommended negatives.';
+      $('st-source').firstChild.textContent = 'Google Ads, search terms, top terms by cost plus any term matching a recommended negative, ' + scope + '. A red chip marks the match.';
     }
     // recommended negatives: which are in the account already
     var inAccount = {};
@@ -740,17 +719,6 @@
     var scope = model.dated.devices ? windowText() : 'since launch, ' + rangeText(model.start, model.through);
     var names = { MOBILE: 'Mobile', DESKTOP: 'Desktop', TABLET: 'Tablet' };
     var order = ['MOBILE', 'DESKTOP', 'TABLET'];
-    if (!model.devices.length && model.fallback) {
-      order.forEach(function (k) {
-        var share = FALLBACK_DEVICES[k];
-        var block = el('div', { class: 'stat' + (k === 'MOBILE' ? ' hot' : '') }, el('span', { class: 'label', text: names[k] }),
-          el('b', { class: 'num', text: share != null ? pct(share, 0) : '·' }),
-          el('p', { text: share != null ? 'of impressions, read ' + CONFIG.fallbackReadLabel + '. Purchases by device arrive with the feed.' : 'Share arrives with the feed.' }));
-        host.appendChild(block);
-      });
-      $('dev-source').firstChild.textContent = 'Google Ads, campaign report by device, read ' + CONFIG.fallbackReadLabel + '.';
-      return;
-    }
     var groups = groupBy(rows, function (r) { return r.device; }, function (r) { return { device: r.device }; });
     var total = sum(rows), hot = '', hotV = -1, other = { impressions: 0, conv: 0 };
     groups.forEach(function (g) { if (order.indexOf(g.device) < 0) { other.impressions += g.impressions; other.conv += g.conv; } else if (g.impressions > hotV) { hotV = g.impressions; hot = g.device; } });
@@ -774,14 +742,18 @@
     var cs = model.campaigns.length ? model.campaigns : [{ name: 'DPT | Search | Brand + Products | Fall 2026', status: 'ENABLED', start: '2026-10-22', end: '2026-12-21', bidding: 'MAXIMIZE_CLICKS', cpcCap: 1.25, budget: 7.14, delivery: 'STANDARD' }];
     cs.forEach(function (c) {
       dl.appendChild(el('dt', { text: 'Campaign' }));
-      dl.appendChild(el('dd', { text: c.name + (c.status ? ' · ' + humanize(c.status) : '') + (c.start ? ' · ' + rangeText(c.start, c.end || c.start) : '') }));
+      dl.appendChild(el('dd', { text: c.name + (c.status ? ' · ' + humanize(c.status) : '') + (c.start ? ' · ' + rangeText(c.start, c.end || c.start) : (CONFIG.campaignDates ? ' · ' + CONFIG.campaignDates : '')) }));
       dl.appendChild(el('dt', { text: 'Budget' }));
       dl.appendChild(el('dd', { text: money(c.budget) + ' a day' + (c.delivery ? ', ' + humanize(c.delivery).toLowerCase() + ' delivery' : '') }));
       dl.appendChild(el('dt', { text: 'Bidding' }));
-      dl.appendChild(el('dd', { text: humanize(c.bidding) + (c.cpcCap ? ', max cost per click ' + money(c.cpcCap) : '') }));
+      dl.appendChild(el('dd', { text: biddingName(c.bidding) + (c.cpcCap ? ', max cost per click ' + money(c.cpcCap) : '') }));
     });
   }
 
+  function biddingName(b) {
+    var names = { TARGET_SPEND: 'Maximize clicks', MAXIMIZE_CLICKS: 'Maximize clicks', MAXIMIZE_CONVERSIONS: 'Maximize conversions', MAXIMIZE_CONVERSION_VALUE: 'Maximize conversion value', TARGET_CPA: 'Target CPA', TARGET_ROAS: 'Target ROAS', MANUAL_CPC: 'Manual CPC', TARGET_IMPRESSION_SHARE: 'Target impression share' };
+    return names[String(b || '').toUpperCase()] || humanize(b);
+  }
   function renderFootnotes() {
     var r = rangeText(range.from, range.to);
     Array.prototype.forEach.call(document.querySelectorAll('.fn-range'), function (n) { n.textContent = r; });
