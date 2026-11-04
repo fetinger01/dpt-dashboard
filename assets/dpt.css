@@ -30,7 +30,7 @@ body{
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
   padding-block:40px 64px;
 }
-.page{max-width:920px;margin:0 auto;display:grid;gap:56px;grid-template-columns:minmax(0,1fr)}
+.page{max-width:1320px;margin:0 auto;display:grid;gap:56px;grid-template-columns:minmax(0,1fr)}
 .page>*,.sec>*,.top>*,.masthead>*,.sec>div>*{min-width:0;max-width:100%}
 a{color:var(--link)}
 a:focus-visible{outline:2px solid var(--link);outline-offset:2px;border-radius:2px}
@@ -44,7 +44,7 @@ sup.fn{font-size:11px;line-height:0;vertical-align:super;margin-left:1px}
 sup.fn a{text-decoration:none;font-weight:700}
 .label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-500);margin:0}
 .source{font-size:13px;color:var(--ink-500);margin-top:8px}
-.prose{max-width:66ch;color:var(--ink)}
+.prose{max-width:84ch;color:var(--ink)}
 .caption{font-size:14px;color:var(--ink-700)}
 .num,.tnum{font-variant-numeric:tabular-nums}
 
@@ -54,7 +54,7 @@ sup.fn a{text-decoration:none;font-weight:700}
 .brand{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px}
 .wordmark{font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
 .wordmark .dot{color:var(--red-text)}
-.lede{font-size:18px;color:var(--ink-700);max-width:60ch}
+.lede{font-size:18px;color:var(--ink-700);max-width:76ch}
 .pills{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .pill{display:inline-block;padding:6px 12px;border-radius:999px;font-size:13px;font-weight:600;line-height:1.2}
 .pill-status{background:var(--red);color:var(--on-red)}
@@ -94,6 +94,7 @@ sup.fn a{text-decoration:none;font-weight:700}
 .kf div:nth-child(n+3){border-top:1px solid var(--line)}
 .kf b{display:block;font-size:30px;font-weight:800;line-height:1.1;letter-spacing:-.01em;white-space:nowrap}
 @media (min-width:720px) and (max-width:919px){.kf b{font-size:clamp(22px,3.3vw,30px)}}
+@media (min-width:1100px){.kf b{font-size:34px}.kf div{padding:20px 18px}}
 .kf .label{margin-top:6px}
 @media (min-width:720px){
   .kf{grid-template-columns:repeat(6,1fr)}
@@ -168,7 +169,7 @@ figcaption{margin:0}
 /* Product blocks */
 .product{display:grid;gap:16px;padding-top:20px;border-top:1px solid var(--line)}
 .product-head{display:grid;gap:4px}
-.product-head .why{color:var(--ink-700);max-width:66ch}
+.product-head .why{color:var(--ink-700);max-width:84ch}
 .product-head .covers{font-size:14px;color:var(--ink-500)}
 .product-head .pills{margin-top:6px}
 
