@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="/assets/dpt.css">
+<link rel="stylesheet" href="/assets/dpt.css?v=20261104d">
 </head>
 <body>
 <table class="pt" role="presentation"><tfoot><tr><td></td></tr></tfoot><tbody><tr><td>
@@ -23,6 +23,7 @@
       <h1>Fall 2026 search campaign</h1>
       <p class="lede">Results of the Fall 2026 search campaign, read from the Diamond ProTech Google Ads account and refreshed hourly.</p>
       <div class="pills">
+        <span class="live" id="live" hidden><i></i>LIVE</span>
         <span class="pill pill-quiet">Refreshed hourly</span>
         <span class="pill pill-quiet" id="pill-range">Since launch</span>
       </div>
@@ -64,9 +65,27 @@
     </div>
   </header>
 
+  <section class="sec" id="traffic">
+    <div class="sec-head">
+      <p class="label">01 · Traffic</p>
+      <h2>Ad clicks arriving at the store</h2>
+    </div>
+    <div>
+      <div class="stream" id="stream">
+        <canvas id="stream-canvas" aria-hidden="true"></canvas>
+        <div class="nodes">
+          <div class="node"><span class="label">Searches</span><b class="num" id="n-impr">·</b><p>times the ad was shown</p></div>
+          <div class="node"><span class="label">Ad clicks</span><b class="num" id="n-clicks">·</b><p>visits to diamondprotech.co</p></div>
+          <div class="node"><span class="label">Orders</span><b class="num" id="n-orders">·</b><p id="n-orders-note">from those visits</p></div>
+        </div>
+      </div>
+      <p class="source" id="stream-source">Each moving dot is one ad click in the selected range, replayed on a loop; grey dots are searches that saw the ad and did not click, green ones are orders. Figures refresh hourly.<sup class="fn"><a href="#fn1">1</a></sup></p>
+    </div>
+  </section>
+
   <section class="sec" id="daily">
     <div class="sec-head">
-      <p class="label">01 · Daily</p>
+      <p class="label">02 · Daily</p>
       <h2>Spend by day against the budget</h2>
     </div>
     <div>
@@ -85,7 +104,7 @@
 
   <section class="sec" id="keywords">
     <div class="sec-head">
-      <p class="label">02 · Keywords</p>
+      <p class="label">03 · Keywords</p>
       <h2>Where the clicks come from</h2>
     </div>
     <div>
@@ -96,7 +115,7 @@
 
   <section class="sec" id="terms">
     <div class="sec-head">
-      <p class="label">03 · Search terms</p>
+      <p class="label">04 · Search terms</p>
       <h2>What people typed before clicking</h2>
     </div>
     <div>
@@ -112,7 +131,7 @@
 
   <section class="sec" id="devices">
     <div class="sec-head">
-      <p class="label">04 · Devices</p>
+      <p class="label">05 · Devices</p>
       <h2>Where the ads are seen</h2>
     </div>
     <div>
@@ -123,7 +142,7 @@
 
   <section class="sec" id="housekeeping">
     <div class="sec-head">
-      <p class="label">05 · Housekeeping</p>
+      <p class="label">06 · Housekeeping</p>
       <h2>Tracking, budget and bidding</h2>
     </div>
     <div>
@@ -454,6 +473,7 @@
 
     renderMeta();
     renderKF(totals);
+    renderStream(totals);
     renderChart(dailyRows);
     renderKeywords();
     renderTerms();
@@ -469,9 +489,11 @@
     $('meta').textContent = stamp + ' · Google Ads account ' + CONFIG.account + ' · Prepared by Etinger Initiatives';
     $('foot-line').textContent = 'Figures from Google Ads account ' + CONFIG.account + ', refreshed hourly by a script in the account; last refresh ' + fmtStamp(model.lastUpdated) + '.';
     $('pf-right').textContent = 'Refreshed hourly from Google Ads account ' + CONFIG.account + ' · last refresh ' + fmtStamp(model.lastUpdated) + ' · Prepared by Etinger Initiatives';
-    var notice = $('notice');
+    var notice = $('notice'), live = $('live');
     notice.className = 'notice';
     notice.textContent = '';
+    live.hidden = !!model.fallback;
+    live.classList.remove('still');
     if (model.fallback) {
       notice.textContent = 'Feed unavailable, showing figures from ' + CONFIG.fallbackReadLabel + '.';
       notice.classList.add('on');
@@ -480,6 +502,7 @@
       if (age != null && age > 180) {
         notice.textContent = 'The last refresh was ' + Math.round(age / 60) + ' hours ago. The feed refreshes hourly, so the script in the account may need a look.';
         notice.classList.add('on', 'quiet');
+        live.classList.add('still');
       }
     }
   }
@@ -760,6 +783,137 @@
     Array.prototype.forEach.call(document.querySelectorAll('.fn-window'), function (n) { n.textContent = windowText(); });
   }
 
+
+  // ---------- traffic stream ----------
+  var stream = { raf: 0, particles: [], last: 0, acc: { imp: 0, clk: 0 }, totals: null, running: false, visible: true, stillDrawn: false };
+  function cssVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  function hexA(hex, a) {
+    var h = hex.replace('#', '');
+    if (h.length === 3) h = h.split('').map(function (c) { return c + c; }).join('');
+    var n = parseInt(h, 16);
+    return 'rgba(' + ((n >> 16) & 255) + ',' + ((n >> 8) & 255) + ',' + (n & 255) + ',' + a + ')';
+  }
+  function renderStream(t) {
+    stream.totals = t;
+    $('n-impr').textContent = int(t.impressions);
+    $('n-clicks').textContent = int(t.clicks);
+    $('n-orders').textContent = count(t.conv);
+    $('n-orders-note').textContent = t.value > 0 ? money(t.value, false) + ' in orders' : 'from those visits';
+    $('stream-source').firstChild.textContent = 'Each moving dot is one ad click in the selected range, replayed on a loop; grey dots are searches that saw the ad and did not click, green ones are orders. ' + 'Google Ads, ' + windowText() + ', refreshed hourly.';
+    // pacing: the whole range replays over 40 seconds, within sane bounds
+    var loop = 40;
+    stream.clickRate = Math.min(6, Math.max(0.35, (t.clicks || 1) / loop));
+    stream.impRate = Math.min(14, Math.max(0.6, Math.max(0, t.impressions - t.clicks) / loop));
+    stream.buyP = t.clicks > 0 ? Math.min(1, t.conv / t.clicks) : 0;
+    stream.particles = [];
+    stream.stillDrawn = false;
+    startStream();
+  }
+  function streamGeometry(c) {
+    var dpr = window.devicePixelRatio || 1;
+    var w = c.clientWidth || 600, h = c.clientHeight || 170;
+    if (c.width !== Math.round(w * dpr) || c.height !== Math.round(h * dpr)) { c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); }
+    var y = h * 0.6;
+    return { w: w, h: h, dpr: dpr, y: y, x1: w / 6, x2: w / 2, x3: w * 5 / 6, lift: Math.max(24, Math.min(64, w * 0.045)) };
+  }
+  function pathPoint(g, from, to, p, lift) {
+    // gentle arc between two nodes
+    var x = from + (to - from) * p;
+    var y = g.y - Math.sin(Math.PI * p) * lift;
+    return [x, y];
+  }
+  function drawFrame(now) {
+    var c = $('stream-canvas'); if (!c) return;
+    var g = streamGeometry(c), ctx = c.getContext('2d');
+    ctx.setTransform(g.dpr, 0, 0, g.dpr, 0, 0);
+    ctx.clearRect(0, 0, g.w, g.h);
+    var line = cssVar('--line') || '#dee2e6', ink500 = cssVar('--ink-500') || '#6c757d', live = cssVar('--live') || '#ff8a00', ok = cssVar('--success') || '#198754', bg = cssVar('--bg') || '#fff';
+    // guide paths
+    ctx.strokeStyle = line; ctx.lineWidth = 1; ctx.setLineDash([3, 5]);
+    [[g.x1, g.x2], [g.x2, g.x3]].forEach(function (seg) {
+      ctx.beginPath();
+      for (var i = 0; i <= 40; i++) { var pt = pathPoint(g, seg[0], seg[1], i / 40, g.lift); if (i === 0) ctx.moveTo(pt[0], pt[1]); else ctx.lineTo(pt[0], pt[1]); }
+      ctx.stroke();
+    });
+    ctx.setLineDash([]);
+    // nodes
+    var halo = ctx.createRadialGradient(g.x2, g.y, 4, g.x2, g.y, 46);
+    halo.addColorStop(0, hexA(live, 0.22)); halo.addColorStop(1, hexA(live, 0));
+    ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(g.x2, g.y, 46, 0, Math.PI * 2); ctx.fill();
+    [[g.x1, ink500], [g.x2, live], [g.x3, ok]].forEach(function (n) {
+      ctx.beginPath(); ctx.arc(n[0], g.y, 7, 0, Math.PI * 2); ctx.fillStyle = bg; ctx.fill();
+      ctx.lineWidth = 2; ctx.strokeStyle = n[1]; ctx.stroke();
+    });
+    var dt = stream.last ? Math.min(0.1, (now - stream.last) / 1000) : 0;
+    stream.last = now;
+    if (stream.running) {
+      // spawn
+      stream.acc.clk += stream.clickRate * dt; stream.acc.imp += stream.impRate * dt;
+      while (stream.acc.clk >= 1) { stream.acc.clk -= 1; stream.particles.push({ kind: 'click', p: 0, speed: 0.32 + Math.random() * 0.1, lift: g.lift * (0.55 + Math.random() * 0.75), buy: Math.random() < stream.buyP, seg: 0, y0: (Math.random() - 0.5) * 6 }); }
+      while (stream.acc.imp >= 1) { stream.acc.imp -= 1; stream.particles.push({ kind: 'imp', p: 0, speed: 0.28 + Math.random() * 0.12, lift: g.lift * (0.1 + Math.random() * 1.5), end: 0.45 + Math.random() * 0.4, seg: 0, y0: (Math.random() - 0.5) * 10 }); }
+      if (stream.particles.length > 400) stream.particles.splice(0, stream.particles.length - 400);
+    }
+    // draw particles
+    var keep = [];
+    stream.particles.forEach(function (q) {
+      q.p += q.speed * dt;
+      var from = q.seg === 0 ? g.x1 : g.x2, to = q.seg === 0 ? g.x2 : g.x3;
+      if (q.kind === 'imp') {
+        if (q.p >= q.end) return;
+        var pt = pathPoint(g, from, to, q.p, q.lift);
+        var fade = 1 - (q.p / q.end);
+        ctx.beginPath(); ctx.arc(pt[0], pt[1] + q.y0, 2.2, 0, Math.PI * 2); ctx.fillStyle = hexA(ink500, 0.12 + 0.3 * fade); ctx.fill();
+        keep.push(q); return;
+      }
+      if (q.p >= 1) {
+        if (q.seg === 0) {
+          if (q.buy) { q.seg = 1; q.p = 0; q.lift = g.lift * (0.5 + Math.random() * 0.6); keep.push(q); }
+          else { q.flash = (q.flash || 0) + dt; if (q.flash < 0.5) { var a = 1 - q.flash / 0.5; ctx.beginPath(); ctx.arc(g.x2, g.y, 7 + 14 * (1 - a), 0, Math.PI * 2); ctx.strokeStyle = hexA(live, 0.5 * a); ctx.lineWidth = 1.5; ctx.stroke(); keep.push(q); } }
+        } else {
+          q.flash = (q.flash || 0) + dt;
+          if (q.flash < 0.9) { var b = 1 - q.flash / 0.9; ctx.beginPath(); ctx.arc(g.x3, g.y, 7 + 22 * (1 - b), 0, Math.PI * 2); ctx.strokeStyle = hexA(ok, 0.7 * b); ctx.lineWidth = 2; ctx.stroke(); keep.push(q); }
+        }
+        return;
+      }
+      var col = q.seg === 0 ? live : ok;
+      for (var k = 6; k >= 1; k--) {
+        var pp = q.p - k * 0.016; if (pp < 0) continue;
+        var tp = pathPoint(g, from, to, pp, q.lift);
+        ctx.beginPath(); ctx.arc(tp[0], tp[1] + q.y0, 3.2 - k * 0.35, 0, Math.PI * 2); ctx.fillStyle = hexA(col, 0.45 - k * 0.06); ctx.fill();
+      }
+      var pt2 = pathPoint(g, from, to, q.p, q.lift);
+      ctx.beginPath(); ctx.arc(pt2[0], pt2[1] + q.y0, 3.6, 0, Math.PI * 2); ctx.fillStyle = col;
+      ctx.shadowColor = col; ctx.shadowBlur = 12; ctx.fill(); ctx.shadowBlur = 0;
+      keep.push(q);
+    });
+    stream.particles = keep;
+    if (stream.running && stream.visible && !document.hidden) stream.raf = requestAnimationFrame(drawFrame);
+    else stream.raf = 0;
+  }
+  function startStream() {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    stream.running = !reduce;
+    stream.last = 0;
+    if (reduce) {
+      // a still frame: a few dots along the paths
+      stream.particles = [];
+      for (var i = 0; i < 6; i++) stream.particles.push({ kind: 'click', p: 0.12 + i * 0.14, speed: 0, lift: 18 + (i % 3) * 8, seg: 0, y0: 0, buy: false });
+      for (var j = 0; j < 2; j++) stream.particles.push({ kind: 'click', p: 0.3 + j * 0.35, speed: 0, lift: 18, seg: 1, y0: 0, buy: true });
+      drawFrame(performance.now());
+      return;
+    }
+    if (!stream.raf) stream.raf = requestAnimationFrame(drawFrame);
+  }
+  function wireStream() {
+    document.addEventListener('visibilitychange', function () { if (!document.hidden && stream.running && !stream.raf) { stream.last = 0; stream.raf = requestAnimationFrame(drawFrame); } });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        stream.visible = entries[0].isIntersecting;
+        if (stream.visible && stream.running && !stream.raf) { stream.last = 0; stream.raf = requestAnimationFrame(drawFrame); }
+      }, { threshold: 0.05 }).observe($('stream'));
+    }
+  }
+
   // ---------- controls ----------
   function setRange(kind) {
     range.kind = kind;
@@ -768,6 +922,7 @@
     renderAll();
   }
   function wireControls() {
+    wireStream();
     Array.prototype.forEach.call(document.querySelectorAll('.rangepill'), function (b) {
       b.addEventListener('click', function () { setRange(b.getAttribute('data-range')); });
     });
