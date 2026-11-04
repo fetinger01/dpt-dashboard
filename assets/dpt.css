@@ -93,6 +93,7 @@ sup.fn a{text-decoration:none;font-weight:700}
 .kf div:nth-child(even){border-left:1px solid var(--line)}
 .kf div:nth-child(n+3){border-top:1px solid var(--line)}
 .kf b{display:block;font-size:30px;font-weight:800;line-height:1.1;letter-spacing:-.01em;white-space:nowrap}
+@media (min-width:720px) and (max-width:919px){.kf b{font-size:clamp(22px,3.3vw,30px)}}
 .kf .label{margin-top:6px}
 @media (min-width:720px){
   .kf{grid-template-columns:repeat(6,1fr)}
