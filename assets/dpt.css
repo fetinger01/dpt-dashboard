@@ -162,9 +162,16 @@ figcaption{margin:0}
 .ar-9x16{aspect-ratio:9/16}
 .ar-16x9{aspect-ratio:16/9}
 .ar-mod{aspect-ratio:970/600}
+.ar-3x2{aspect-ratio:3/2}
+.ar-banner{aspect-ratio:3840/1648}
+.ar-tiles{aspect-ratio:1800/440}
+.ar-steps{aspect-ratio:1800/588}
+.ar-cmp{aspect-ratio:1390/1200}
+.frame.white{background:#fff}
+.frame.white img{background:#fff}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.modules{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-@media (min-width:720px){.modules{grid-template-columns:repeat(4,1fr)}}
+.modules{display:grid;grid-template-columns:1fr;gap:16px}
+.modules .half{max-width:640px}
 
 /* Product blocks */
 .product{display:grid;gap:16px;padding-top:20px;border-top:1px solid var(--line)}
