@@ -77,7 +77,7 @@
       <p class="label">02 · Ads</p>
       <h2>One set of images, every channel</h2>
     </div>
-    <p class="prose">Every ad reuses the listing imagery, so the look is the same whether a shopper meets the brand on Google, Instagram or Amazon. One square ad, one vertical ad and one short clip per product.</p>
+    <p class="prose">Every ad reuses the listing imagery, so the look is the same whether a shopper meets the brand on Google, Instagram or Amazon. One square ad, one vertical ad and one 10 second clip per product, plus the Black Friday brand spot.</p>
 
     <div class="adrow">
       <h3>Diamond Body 36 Kit</h3>
@@ -90,7 +90,7 @@
         <figcaption class="label">Vertical · 9:16</figcaption>
       </figure>
       <figure class="wide">
-        <div class="frame ar-16x9" data-note="Clip, to follow"><video controls muted playsinline preload="none" poster="/img/ads/body36-clip-poster.jpg" aria-label="Diamond Body 36 Kit, short clip"><source src="/img/ads/body36-clip.mp4" type="video/mp4"></video></div>
+        <div class="frame ar-16x9" data-note="Clip, to follow"><video autoplay muted loop playsinline preload="auto" disablepictureinpicture poster="/img/ads/body36-clip-poster.jpg" aria-label="Diamond Body 36 Kit, short clip"><source src="/img/ads/body36-clip.mp4" type="video/mp4"></video></div>
         <figcaption class="label">Clip · 16:9</figcaption>
       </figure>
     </div>
@@ -106,7 +106,7 @@
         <figcaption class="label">Vertical · 9:16</figcaption>
       </figure>
       <figure class="wide">
-        <div class="frame ar-16x9" data-note="Clip, to follow"><video controls muted playsinline preload="none" poster="/img/ads/quickbody-clip-poster.jpg" aria-label="Diamond Quick Body, short clip"><source src="/img/ads/quickbody-clip.mp4" type="video/mp4"></video></div>
+        <div class="frame ar-16x9" data-note="Clip, to follow"><video autoplay muted loop playsinline preload="auto" disablepictureinpicture poster="/img/ads/quickbody-clip-poster.jpg" aria-label="Diamond Quick Body, short clip"><source src="/img/ads/quickbody-clip.mp4" type="video/mp4"></video></div>
         <figcaption class="label">Clip · 16:9</figcaption>
       </figure>
     </div>
@@ -122,9 +122,26 @@
         <figcaption class="label">Vertical · 9:16</figcaption>
       </figure>
       <figure class="wide">
-        <div class="frame ar-16x9" data-note="Clip, to follow"><video controls muted playsinline preload="none" poster="/img/ads/wrap-clip-poster.jpg" aria-label="Diamond Wrap PPF and Vinyl Kit, short clip"><source src="/img/ads/wrap-clip.mp4" type="video/mp4"></video></div>
+        <div class="frame ar-16x9" data-note="Clip, to follow"><video autoplay muted loop playsinline preload="auto" disablepictureinpicture poster="/img/ads/wrap-clip-poster.jpg" aria-label="Diamond Wrap PPF and Vinyl Kit, short clip"><source src="/img/ads/wrap-clip.mp4" type="video/mp4"></video></div>
         <figcaption class="label">Clip · 16:9</figcaption>
       </figure>
+    </div>
+
+    <div class="adrow">
+      <h3>Black Friday brand spot</h3>
+      <figure>
+        <div class="frame ar-1x1" data-note="Square ad, to follow"><img src="/img/ads/brand-bf-ad-1x1.jpg" alt="Black Friday, square ad" onerror="this.parentElement.classList.add('missing')"></div>
+        <figcaption class="label">Square · 1:1</figcaption>
+      </figure>
+      <figure>
+        <div class="frame ar-9x16" data-note="Vertical ad, to follow"><img src="/img/ads/brand-bf-ad-9x16.jpg" alt="Black Friday, vertical ad" onerror="this.parentElement.classList.add('missing')"></div>
+        <figcaption class="label">Vertical · 9:16</figcaption>
+      </figure>
+      <figure class="wide">
+        <div class="frame ar-16x9" data-note="Clip, to follow"><video autoplay muted loop playsinline preload="auto" disablepictureinpicture poster="/img/ads/brand-bf-clip-poster.jpg" aria-label="Black Friday brand spot, 15 second clip"><source src="/img/ads/brand-bf-clip.mp4" type="video/mp4"></video></div>
+        <figcaption class="label">Clip · 16:9 · 15 s</figcaption>
+      </figure>
+      <p class="caption">Offer, code and dates on the Black Friday pieces are placeholders until the real ones are confirmed; the voiceover and music are still to come.</p>
     </div>
 
     <p class="caption">Google Shopping and YouTube, Instagram and Facebook, Amazon Sponsored Brands.</p>
@@ -208,6 +225,9 @@
     var probe = new Image();
     probe.onerror = function () { v.hidden = true; v.parentElement.classList.add('missing'); };
     probe.src = v.getAttribute('poster');
+    // Clips run on their own, muted, and loop; nudge any browser that waits for a gesture.
+    v.muted = true;
+    var p = v.play(); if (p && p.catch) { p.catch(function () {}); }
   });
 })();
 </script>
